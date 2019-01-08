@@ -6,7 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Car {
@@ -18,13 +21,33 @@ public class Car {
   
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "owner")
+  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
   private Owner owner;
 
   //Getter and setter
   public Owner getOwner() {
     return owner;
   }
-
+//  @ManyToMany(mappedBy = "cars")
+//  private Set<Owner> owners;
+//  public Set<Owner> getOwners() {
+//    return owners;
+//  }
+//
+//  public void setOwners(Set<Owner> owners) {
+//    this.owners = owners;
+//  }
+//  @ManyToMany(mappedBy="cars")
+//  private Set<Trip> trips;
+//
+//
+//
+// public Set<Trip> getTrips() {
+//     return trips;
+// }
+//
+// public void setTrips(Set<Trip> trips) {
+//     this.trips = trips;
   public void setOwner(Owner owner) {
     this.owner = owner;
   }
